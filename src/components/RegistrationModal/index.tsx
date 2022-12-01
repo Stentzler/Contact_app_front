@@ -91,7 +91,7 @@ function RegistrationModal() {
 	return (
 		<>
 			<Link underline='always' onClick={handleClickOpen}>
-				Create an account
+				Registrar-se
 			</Link>
 			<BootstrapDialog
 				onClose={handleClose}

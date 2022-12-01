@@ -18,11 +18,14 @@ export default function ContactCard({user_name}: IProps) {
 				width: 380,
 				borderRadius: 12,
 				'&:hover': {
-					opacity: [0.95, 0.95, 0.95],
+					opacity: [0.9, 0.9, 0.95],
 				},
 			}}
 		>
-			<Card variant='outlined'>
+			<Card
+				variant='outlined'
+				style={{backgroundColor: '#f4f4f4', borderRadius: '12px'}}
+			>
 				<React.Fragment>
 					<CardContent>
 						<Wrapper>

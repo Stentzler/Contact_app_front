@@ -7,13 +7,14 @@ export const StyledCardBtnContainer = styled.div`
 	justify-content: center;
 	align-items: center;
 	gap: 25px;
+	background-color: #f4f4f4;
 `;
 
 export const Wrapper = styled.div`
 	h3 {
 		text-align: center;
 		padding: 8px;
-		background-color: #f6f6f6;
+		background-color: #e4e4e4;
 		margin-bottom: 6px;
 	}
 

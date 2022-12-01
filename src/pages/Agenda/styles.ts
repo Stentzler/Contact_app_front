@@ -13,6 +13,15 @@ export const StyledContainerAgenda = styled.div`
 		background-color: rgba(0, 0, 0, 0.1);
 		border: 2px solid #000;
 		border-radius: 12px;
+
+		.profile {
+			display: flex;
+			gap: 12px;
+
+			svg {
+				transform: translateY(1px);
+			}
+		}
 	}
 
 	.menu-items {
@@ -20,6 +29,23 @@ export const StyledContainerAgenda = styled.div`
 		display: flex;
 		flex-direction: column;
 		gap: 32px;
+
+		svg {
+			transform: translateY(2px);
+		}
+
+		.menu-btn {
+			display: inline-block;
+			color: var(--dark);
+			flex-basis: 20px;
+			transition: all 0.4s;
+
+			&:hover {
+				cursor: pointer;
+				color: #000;
+				transform: translate(8px, 0);
+			}
+		}
 	}
 
 	.user-contacts {
@@ -36,7 +62,7 @@ export const StyledContainerAgenda = styled.div`
 	}
 
 	.card-container {
-		padding: 18px 12px 18px 52px;
+		padding: 28px 12px 28px 52px;
 		width: 100%;
 		gap: 28px;
 		display: flex;
@@ -67,8 +93,36 @@ export const StyledContainerAgenda = styled.div`
 		background: #a1a1a1;
 	}
 
-	svg {
-		transform: translateY(2px);
+	.input-container {
+		width: 270px;
+		margin-bottom: 16px;
+		margin-top: 8px;
+		display: flex;
+
+		input {
+			width: 100%;
+			padding: 8px 16px;
+			border: 2px solid #000;
+			border-radius: 25px;
+			background-color: #f4f4f4;
+			transition: all 0.3s;
+		}
+
+		input:placeholder-shown {
+			border-color: #ccc;
+		}
+
+		svg {
+			color: #000;
+			position: relative;
+			right: 34px;
+			top: 10px;
+			transition: all 0.3s;
+		}
+
+		input:placeholder-shown ~ svg {
+			color: #ccc;
+		}
 	}
 
 	@media (max-width: 1300px) {
