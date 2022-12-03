@@ -9,7 +9,7 @@ interface Props {
 
 interface IContext {
 	login: (data: any) => Promise<void>;
-	setToken: React.Dispatch<React.SetStateAction<{}>>;
+	setToken: React.Dispatch<React.SetStateAction<string>>;
 	token: any;
 	setUserData: React.Dispatch<React.SetStateAction<{}>>;
 	userData: any;
@@ -27,7 +27,7 @@ export interface IUserRequest {
 const UserContext = createContext<IContext>({} as IContext);
 
 export const UserProvider = ({children}: Props) => {
-	const [token, setToken] = useState({});
+	const [token, setToken] = useState('');
 	const [userData, setUserData] = useState({});
 	const [disableLoginButton, setDisableLoginButton] = useState(false);
 	const navigate = useNavigate();
@@ -38,7 +38,7 @@ export const UserProvider = ({children}: Props) => {
 		try {
 			// get/set token
 			const response = await api.post('/users/login', data);
-			setToken(response.data);
+			setToken(response.data.token);
 
 			// get/set UserData
 			const userData = await api.get('/users', {

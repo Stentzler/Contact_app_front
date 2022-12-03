@@ -79,7 +79,7 @@ function UserDeleteModal({userName}: IProps) {
 			});
 
 			setUserData({});
-			setToken({});
+			setToken('');
 
 			setDisableDelButton(false);
 			toastSuccess('Usuário deleteado com sucesso!');

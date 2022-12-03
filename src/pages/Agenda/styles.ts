@@ -32,6 +32,7 @@ export const StyledContainerAgenda = styled.div`
 
 		svg {
 			transform: translateY(2px);
+			margin-right: 4px;
 		}
 
 		.menu-btn {

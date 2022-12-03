@@ -1,13 +1,9 @@
 import {useContext, useEffect} from 'react';
-import {
-	FaSignOutAlt,
-	FaUserCheck,
-	FaUserEdit,
-	FaUserPlus,
-} from 'react-icons/fa';
+import {FaSignOutAlt, FaUserCheck, FaUserPlus} from 'react-icons/fa';
 import UserContext from '../../context/UserContext';
 import {useNavigate} from 'react-router-dom';
 import UserDeleteModal from '../UserDeleteModal';
+import UserEditModal from '../UserEditModal';
 
 function UserMenu() {
 	const {userData, token} = useContext(UserContext);
@@ -22,8 +18,8 @@ function UserMenu() {
 	}, []);
 
 	const handleLogout = () => {
-		// navigate('/')
-		// setToken({})
+		// navigate('/');
+		// setToken('');
 		console.log(userData);
 		console.log(token);
 	};
@@ -51,12 +47,8 @@ function UserMenu() {
 						</span>
 					</div>
 
-					<div className='menu-item'>
-						<span className='menu-btn'>
-							<FaUserEdit />
-							Editar Meus dados
-						</span>
-					</div>
+					<UserEditModal />
+
 					<UserDeleteModal userName={userData.fullName} />
 				</div>
 			</div>
