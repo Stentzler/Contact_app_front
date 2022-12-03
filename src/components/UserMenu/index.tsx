@@ -1,3 +1,4 @@
+import {useContext, useEffect} from 'react';
 import {
 	FaSignOutAlt,
 	FaUserCheck,
@@ -5,9 +6,26 @@ import {
 	FaUserPlus,
 	FaUserSlash,
 } from 'react-icons/fa';
+import UserContext from '../../context/UserContext';
+import {useNavigate} from 'react-router-dom';
 
 function UserMenu() {
-	const userName = 'Vinicius Stentzler';
+	const {userData, token} = useContext(UserContext);
+	const navigate = useNavigate();
+
+	// isToken
+	useEffect(() => {
+		if (Object.keys(token).length === 0 && token.constructor === Object) {
+			navigate('/');
+		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, []);
+
+	const handleLogout = () => {
+		// navigate('/')
+		console.log(userData);
+		console.log(token);
+	};
 
 	return (
 		<>
@@ -15,11 +33,11 @@ function UserMenu() {
 				<div className='menu-items'>
 					<div className='profile'>
 						<FaUserCheck size={25} />
-						<h3>{userName}</h3>
+						<h3>{userData?.fullName}</h3>
 					</div>
 
 					<div className='menu-item'>
-						<span className='menu-btn'>
+						<span className='menu-btn' onClick={handleLogout}>
 							<FaSignOutAlt />
 							Logout
 						</span>

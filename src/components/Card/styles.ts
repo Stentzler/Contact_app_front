@@ -16,6 +16,7 @@ export const Wrapper = styled.div`
 		padding: 8px;
 		background-color: #e4e4e4;
 		margin-bottom: 6px;
+		border-radius: 8px;
 	}
 
 	span {

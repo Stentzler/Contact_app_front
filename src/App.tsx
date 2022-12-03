@@ -5,22 +5,25 @@ import {AnimatePresence} from 'framer-motion';
 import {MotionOpacity} from './components/Motion';
 import Footer from './components/Footer';
 import Agenda from './pages/Agenda';
+import {UserProvider} from './context/UserContext';
 
 function App() {
 	return (
 		<Router>
-			<GlobalStyle />
-			<AnimatePresence>
-				<MotionOpacity>
-					<>
-						<Routes>
-							<Route path='/' element={<LandingPage />} />
-							<Route path='/agenda' element={<Agenda />} />
-						</Routes>
-						<Footer />
-					</>
-				</MotionOpacity>
-			</AnimatePresence>
+			<UserProvider>
+				<GlobalStyle />
+				<AnimatePresence>
+					<MotionOpacity>
+						<>
+							<Routes>
+								<Route path='/' element={<LandingPage />} />
+								<Route path='/agenda' element={<Agenda />} />
+							</Routes>
+							<Footer />
+						</>
+					</MotionOpacity>
+				</AnimatePresence>
+			</UserProvider>
 		</Router>
 	);
 }

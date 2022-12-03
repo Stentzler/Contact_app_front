@@ -11,6 +11,8 @@ import {useForm, SubmitHandler, Controller} from 'react-hook-form';
 import {yupResolver} from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import {StyledRegisterForm} from './styles';
+import {toastError, toastSuccess} from '../../utils/toasts';
+import api from '../../utils/axios';
 
 const BootstrapDialog = styled(Dialog)(({theme}) => ({
 	'& .MuiDialogContent-root': {
@@ -67,6 +69,7 @@ interface IFormInputs {
 
 function RegistrationModal() {
 	const [open, setOpen] = useState(false);
+	const [disableBtn, setDisableBtn] = useState(false);
 
 	const {
 		control,
@@ -84,8 +87,22 @@ function RegistrationModal() {
 		setOpen(false);
 	};
 
-	const onSubmit: SubmitHandler<IFormInputs> = data => {
-		console.log(data);
+	const onSubmit: SubmitHandler<IFormInputs> = async data => {
+		const {confirmPassword, ...userData} = data;
+		setDisableBtn(true);
+
+		try {
+			await api.post('/users', userData);
+
+			setDisableBtn(false);
+			toastSuccess('Usuário criado com sucesso!');
+			handleClose();
+		} catch (error: any) {
+			const message: string = error.response.data.message;
+
+			setDisableBtn(false);
+			toastError(message);
+		}
 	};
 
 	return (
@@ -211,8 +228,8 @@ function RegistrationModal() {
 								/>
 							)}
 						/>
-						<button className='custom-btn'>
-							<span>Registrar</span>
+						<button className='custom-btn' disabled={disableBtn}>
+							{disableBtn ? 'Loading...' : <span>Registrar</span>}
 						</button>
 					</StyledRegisterForm>
 				</DialogContent>
