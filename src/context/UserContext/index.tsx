@@ -8,10 +8,12 @@ interface Props {
 }
 
 interface IContext {
-	disableLoginButton: boolean;
 	login: (data: any) => Promise<void>;
+	setToken: React.Dispatch<React.SetStateAction<{}>>;
 	token: any;
+	setUserData: React.Dispatch<React.SetStateAction<{}>>;
 	userData: any;
+	disableLoginButton: boolean;
 }
 
 export interface IUserRequest {
@@ -58,8 +60,10 @@ export const UserProvider = ({children}: Props) => {
 	return (
 		<UserContext.Provider
 			value={{
-				disableLoginButton,
 				login,
+				setUserData,
+				setToken,
+				disableLoginButton,
 				token,
 				userData,
 			}}

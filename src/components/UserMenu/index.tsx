@@ -4,10 +4,10 @@ import {
 	FaUserCheck,
 	FaUserEdit,
 	FaUserPlus,
-	FaUserSlash,
 } from 'react-icons/fa';
 import UserContext from '../../context/UserContext';
 import {useNavigate} from 'react-router-dom';
+import UserDeleteModal from '../UserDeleteModal';
 
 function UserMenu() {
 	const {userData, token} = useContext(UserContext);
@@ -23,6 +23,7 @@ function UserMenu() {
 
 	const handleLogout = () => {
 		// navigate('/')
+		// setToken({})
 		console.log(userData);
 		console.log(token);
 	};
@@ -56,13 +57,7 @@ function UserMenu() {
 							Editar Meus dados
 						</span>
 					</div>
-
-					<div className='menu-item'>
-						<span className='menu-btn'>
-							<FaUserSlash />
-							Excluir minha conta
-						</span>
-					</div>
+					<UserDeleteModal userName={userData.fullName} />
 				</div>
 			</div>
 		</>
