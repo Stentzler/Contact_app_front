@@ -11,6 +11,7 @@ import UserContext from '../../context/UserContext';
 import ContactContext from '../../context/ContactContext';
 import api from '../../utils/axios';
 import {toastError, toastSuccess} from '../../utils/toasts';
+import {ContactInfo} from '../../interfaces';
 
 const BootstrapDialog = styled(Dialog)(({theme}) => ({
 	'& .MuiDialogContent-root': {
@@ -51,8 +52,12 @@ function BootstrapDialogTitle(props: DialogTitleProps) {
 	);
 }
 
+interface IProps {
+	contactData: ContactInfo;
+}
+
 // Pegar id do contato
-function ContactDeleteModal({contactData}: any) {
+function ContactDeleteModal({contactData}: IProps) {
 	const [open, setOpen] = useState(false);
 	const [disableBtn, setDisableBtn] = useState(false);
 	const {token} = useContext(UserContext);

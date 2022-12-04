@@ -14,6 +14,7 @@ import {FaUserEdit} from 'react-icons/fa';
 import api from '../../utils/axios';
 import UserContext from '../../context/UserContext';
 import {toastError, toastSuccess} from '../../utils/toasts';
+import {IFormInputs} from '../../interfaces';
 
 const BootstrapDialog = styled(Dialog)(({theme}) => ({
 	'& .MuiDialogContent-root': {
@@ -52,15 +53,6 @@ function BootstrapDialogTitle(props: DialogTitleProps) {
 			) : null}
 		</DialogTitle>
 	);
-}
-
-interface IFormInputs {
-	email: string;
-	password: string;
-	confirmPassword: string;
-	fullName: string;
-	mobilePhone: string;
-	phone: string;
 }
 
 function UserEditModal() {

@@ -1,6 +1,11 @@
 import {StyledHeaderContainer} from './styles';
 
-function Header({ptext = '', htext = ''}) {
+interface IProps {
+	ptext: string;
+	htext: string;
+}
+
+function Header({ptext = '', htext = ''}: IProps) {
 	return (
 		<StyledHeaderContainer>
 			{htext && <h1 className='header-h1'>{htext}</h1>}

@@ -6,11 +6,7 @@ import RegistrationModal from '../RegistrationModal';
 import {loginSchema} from '../../utils/schemas';
 import {useContext} from 'react';
 import UserContext from '../../context/UserContext';
-
-interface IFormInputs {
-	email: string;
-	password: string;
-}
+import {IFormInputs} from '../../interfaces';
 
 function LoginForm() {
 	const {login, disableLoginButton} = useContext(UserContext);

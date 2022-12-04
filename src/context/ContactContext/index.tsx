@@ -1,31 +1,18 @@
-import {
-	createContext,
-	useState,
-	ReactNode,
-	SetStateAction,
-	Dispatch,
-} from 'react';
+import {createContext, useState, ReactNode} from 'react';
+import {ContactInfo} from '../../interfaces';
 
-interface Props {
+interface IProps {
 	children: ReactNode;
 }
 
 interface IContext {
-	contacts: any[];
-	setContacts: any;
-}
-
-export interface IContactUpdateRequest {
-	fullName?: string;
-	email?: string;
-	password?: string;
-	mobilePhone?: string;
-	phone?: string;
+	contacts: ContactInfo[];
+	setContacts: React.Dispatch<React.SetStateAction<never[]>>;
 }
 
 const ContactContext = createContext<IContext>({} as IContext);
 
-export const ContactProvider = ({children}: Props) => {
+export const ContactProvider = ({children}: IProps) => {
 	const [contacts, setContacts] = useState([]);
 
 	return (

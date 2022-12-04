@@ -53,7 +53,7 @@ function BootstrapDialogTitle(props: DialogTitleProps) {
 }
 
 interface IProps {
-	userName: string;
+	userName: string | undefined;
 }
 
 // Pegar id do contato

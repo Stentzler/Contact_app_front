@@ -14,6 +14,7 @@ import api from '../../utils/axios';
 import {toastError, toastSuccess} from '../../utils/toasts';
 import UserContext from '../../context/UserContext';
 import ContactContext from '../../context/ContactContext';
+import {ContactInfo, IFormInputs} from '../../interfaces';
 
 const BootstrapDialog = styled(Dialog)(({theme}) => ({
 	'& .MuiDialogContent-root': {
@@ -54,15 +55,8 @@ function BootstrapDialogTitle(props: DialogTitleProps) {
 	);
 }
 
-interface IFormInputs {
-	email: string;
-	fullName: string;
-	mobilePhone: string;
-	phone: string;
-}
-
 interface IProps {
-	contactData: any;
+	contactData: ContactInfo;
 }
 
 function ContactEditModal({contactData}: IProps) {

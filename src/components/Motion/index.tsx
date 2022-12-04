@@ -1,10 +1,10 @@
 import {motion} from 'framer-motion';
 
-interface Props {
+interface IProps {
 	children: JSX.Element;
 }
 
-export function MotionOpacity({children}: Props) {
+export function MotionOpacity({children}: IProps) {
 	return (
 		<motion.div
 			key={'motion-interface'}

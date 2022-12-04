@@ -6,10 +6,12 @@ import Typography from '@mui/material/Typography';
 import {StyledCardBtnContainer, Wrapper} from './styles';
 import ContactEditModal from '../ContactEditModal';
 import ContactDeleteModal from '../ContactDeleteModal';
+import {ContactInfo} from '../../interfaces';
 
 interface IProps {
-	contactData: any;
+	contactData: ContactInfo;
 }
+
 export default function ContactCard({contactData}: IProps) {
 	const firstName = contactData.fullName.split(' ')[0];
 

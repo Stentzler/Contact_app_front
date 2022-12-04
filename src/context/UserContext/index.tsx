@@ -3,6 +3,7 @@ import api from '../../utils/axios';
 import {toastError, toastSuccess} from '../../utils/toasts';
 import {useNavigate} from 'react-router-dom';
 import ContactContext from '../ContactContext';
+import {IUserData} from '../../interfaces';
 
 interface Props {
 	children: ReactNode;
@@ -11,25 +12,17 @@ interface Props {
 interface IContext {
 	login: (data: any) => Promise<void>;
 	setToken: React.Dispatch<React.SetStateAction<string>>;
-	token: any;
+	token: string;
 	setUserData: React.Dispatch<React.SetStateAction<{}>>;
-	userData: any;
+	userData: IUserData;
 	disableLoginButton: boolean;
-}
-
-export interface IUserRequest {
-	fullName: string;
-	email: string;
-	password: string;
-	mobilePhone: string;
-	phone?: string;
 }
 
 const UserContext = createContext<IContext>({} as IContext);
 
 export const UserProvider = ({children}: Props) => {
 	const [token, setToken] = useState('');
-	const [userData, setUserData] = useState({});
+	const [userData, setUserData] = useState<IUserData | {}>({});
 	const [disableLoginButton, setDisableLoginButton] = useState(false);
 	const navigate = useNavigate();
 
