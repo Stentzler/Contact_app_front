@@ -6,24 +6,27 @@ import {MotionOpacity} from './components/Motion';
 import Footer from './components/Footer';
 import Agenda from './pages/Agenda';
 import {UserProvider} from './context/UserContext';
+import {ContactProvider} from './context/ContactContext';
 
 function App() {
 	return (
 		<Router>
-			<UserProvider>
-				<GlobalStyle />
-				<AnimatePresence>
-					<MotionOpacity>
-						<>
-							<Routes>
-								<Route path='/' element={<LandingPage />} />
-								<Route path='/agenda' element={<Agenda />} />
-							</Routes>
-							<Footer />
-						</>
-					</MotionOpacity>
-				</AnimatePresence>
-			</UserProvider>
+			<ContactProvider>
+				<UserProvider>
+					<GlobalStyle />
+					<AnimatePresence>
+						<MotionOpacity>
+							<>
+								<Routes>
+									<Route path='/' element={<LandingPage />} />
+									<Route path='/agenda' element={<Agenda />} />
+								</Routes>
+								<Footer />
+							</>
+						</MotionOpacity>
+					</AnimatePresence>
+				</UserProvider>
+			</ContactProvider>
 		</Router>
 	);
 }

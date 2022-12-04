@@ -8,10 +8,11 @@ import ContactEditModal from '../ContactEditModal';
 import ContactDeleteModal from '../ContactDeleteModal';
 
 interface IProps {
-	user_name: any;
+	contactData: any;
 }
-export default function ContactCard({user_name}: IProps) {
-	const x = user_name;
+export default function ContactCard({contactData}: IProps) {
+	const firstName = contactData.fullName.split(' ')[0];
+
 	return (
 		<Box
 			sx={{
@@ -29,25 +30,25 @@ export default function ContactCard({user_name}: IProps) {
 				<React.Fragment>
 					<CardContent>
 						<Wrapper>
-							<h3>{x}</h3>
+							<h3>{firstName}</h3>
 							<Typography sx={{mb: 1.5, color: '#000'}}>
-								<span>Nome:</span> {x}
+								<span>Nome:</span> {contactData.fullName}
 							</Typography>
 							<Typography sx={{mb: 1.5, color: '#000'}}>
-								<span>Email:</span> {x}@gmail.com
+								<span>Email:</span> {contactData.email}
 							</Typography>
 							<Typography sx={{mb: 1.5, color: '#000'}}>
-								<span>Telefone:</span> {x}41-1233-2342
+								<span>Telefone:</span> {contactData.mobilePhone}
 							</Typography>
 							<Typography sx={{mb: 1.5, color: '#000'}}>
-								<span>Fixo:</span> {x}41-1233-1231
+								<span>Fixo:</span> {contactData.phone}
 							</Typography>
 						</Wrapper>
 					</CardContent>
 
 					<StyledCardBtnContainer>
-						<ContactEditModal />
-						<ContactDeleteModal />
+						<ContactEditModal contactData={contactData} />
+						<ContactDeleteModal contactData={contactData} />
 					</StyledCardBtnContainer>
 				</React.Fragment>
 			</Card>

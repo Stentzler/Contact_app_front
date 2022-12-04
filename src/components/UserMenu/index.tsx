@@ -4,18 +4,36 @@ import UserContext from '../../context/UserContext';
 import {useNavigate} from 'react-router-dom';
 import UserDeleteModal from '../UserDeleteModal';
 import UserEditModal from '../UserEditModal';
+import api from '../../utils/axios';
+import ContactCreateModal from '../ContactCreateModal';
 
 function UserMenu() {
-	const {userData, token} = useContext(UserContext);
+	const {userData, token, setUserData} = useContext(UserContext);
 	const navigate = useNavigate();
 
 	// isToken
 	useEffect(() => {
-		if (Object.keys(token).length === 0 && token.constructor === Object) {
+		if (token) {
+			validateToken();
+		} else {
 			navigate('/');
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
+
+	const validateToken = async () => {
+		try {
+			const response = await api.get('/users', {
+				headers: {
+					Authorization: `Bearer ${token}`,
+				},
+			});
+
+			setUserData(response.data);
+		} catch (error) {
+			navigate('/');
+		}
+	};
 
 	const handleLogout = () => {
 		// navigate('/');
@@ -40,12 +58,7 @@ function UserMenu() {
 						</span>
 					</div>
 
-					<div className='menu-item'>
-						<span className='menu-btn'>
-							<FaUserPlus />
-							Novo Contato
-						</span>
-					</div>
+					<ContactCreateModal />
 
 					<UserEditModal />
 

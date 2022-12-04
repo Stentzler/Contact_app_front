@@ -5,8 +5,12 @@ import DialogContent from '@mui/material/DialogContent';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import {Typography} from '@mui/material';
-import {useState} from 'react';
+import {useContext, useState} from 'react';
 import {StyledDeleteContactContainer} from './styles';
+import UserContext from '../../context/UserContext';
+import ContactContext from '../../context/ContactContext';
+import api from '../../utils/axios';
+import {toastError, toastSuccess} from '../../utils/toasts';
 
 const BootstrapDialog = styled(Dialog)(({theme}) => ({
 	'& .MuiDialogContent-root': {
@@ -48,8 +52,11 @@ function BootstrapDialogTitle(props: DialogTitleProps) {
 }
 
 // Pegar id do contato
-function ContactDeleteModal() {
+function ContactDeleteModal({contactData}: any) {
 	const [open, setOpen] = useState(false);
+	const [disableBtn, setDisableBtn] = useState(false);
+	const {token} = useContext(UserContext);
+	const {setContacts} = useContext(ContactContext);
 
 	const handleClickOpen = () => {
 		setOpen(true);
@@ -58,9 +65,30 @@ function ContactDeleteModal() {
 		setOpen(false);
 	};
 
-	const confirmDelete = () => {
-		console.log('Deletar!');
-		handleClose();
+	const confirmDelete = async () => {
+		setDisableBtn(true);
+
+		try {
+			await api.delete(`/users/contacts/${contactData.id}`, {
+				headers: {
+					Authorization: `Bearer ${token}`,
+				},
+			});
+
+			const contacts = await api.get('/users/contacts', {
+				headers: {Authorization: `Bearer ${token}`},
+			});
+			setContacts(contacts.data);
+
+			setDisableBtn(false);
+			toastSuccess('Contato excluído com sucesso!');
+			handleClose();
+		} catch (error: any) {
+			const message: string = error.response.data.message;
+
+			setDisableBtn(false);
+			toastError(message);
+		}
 	};
 
 	return (
@@ -86,13 +114,14 @@ function ContactDeleteModal() {
 				<StyledDeleteContactContainer>
 					<DialogContent dividers>
 						<Typography sx={{mt: 2, mb: 2}}>
-							Você realmente deseja excluir o usuário {'nome_usuário'}?
+							Você realmente deseja excluir o usuário {contactData.fullName}?
 						</Typography>
 					</DialogContent>
 					<button
 						className='custom-btn'
 						onClick={confirmDelete}
 						style={{backgroundColor: '#c70707'}}
+						disabled={disableBtn}
 					>
 						<span>Deletar</span>
 					</button>

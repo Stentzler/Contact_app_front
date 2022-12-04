@@ -1,7 +1,11 @@
+import {useContext} from 'react';
 import {FaSearch} from 'react-icons/fa';
+import ContactContext from '../../context/ContactContext';
 import ContactCard from '../Card';
 
 function CardContainer() {
+	const {contacts} = useContext(ContactContext);
+
 	return (
 		<>
 			<div className='user-contacts'>
@@ -14,12 +18,9 @@ function CardContainer() {
 					<FaSearch />
 				</div>
 				<div className='card-container'>
-					<ContactCard user_name={'Ayrton'} />
-					<ContactCard user_name={'Douglas'} />
-					<ContactCard user_name={'Xhunda'} />
-					<ContactCard user_name={'Estefani'} />
-					<ContactCard user_name={'Estefani'} />
-					<ContactCard user_name={'Estefani'} />
+					{contacts.map(contact => (
+						<ContactCard contactData={contact} key={contact.id} />
+					))}
 				</div>
 			</div>
 		</>

@@ -10,9 +10,10 @@ import {useForm, SubmitHandler, Controller} from 'react-hook-form';
 import {yupResolver} from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import {StyledEditContactForm} from './styles';
+import {FaUserPlus} from 'react-icons/fa';
 import api from '../../utils/axios';
-import {toastError, toastSuccess} from '../../utils/toasts';
 import UserContext from '../../context/UserContext';
+import {toastError, toastSuccess} from '../../utils/toasts';
 import ContactContext from '../../context/ContactContext';
 
 const BootstrapDialog = styled(Dialog)(({theme}) => ({
@@ -67,11 +68,7 @@ interface IFormInputs {
 	phone: string;
 }
 
-interface IProps {
-	contactData: any;
-}
-
-function ContactEditModal({contactData}: IProps) {
+function ContactCreateModal() {
 	const [open, setOpen] = useState(false);
 	const [disableBtn, setDisableBtn] = useState(false);
 	const {token} = useContext(UserContext);
@@ -97,19 +94,21 @@ function ContactEditModal({contactData}: IProps) {
 		setDisableBtn(true);
 
 		try {
-			await api.patch(`/users/contacts/${contactData.id}`, data, {
+			await api.post('/users/contacts', data, {
 				headers: {
 					Authorization: `Bearer ${token}`,
 				},
 			});
 
 			const contacts = await api.get('/users/contacts', {
-				headers: {Authorization: `Bearer ${token}`},
+				headers: {
+					Authorization: `Bearer ${token}`,
+				},
 			});
 			setContacts(contacts.data);
 
 			setDisableBtn(false);
-			toastSuccess('Dados atualizados com sucesso!');
+			toastSuccess('Contato adicionado com sucesso!');
 			handleClose();
 		} catch (error: any) {
 			const message: string = error.response.data.message;
@@ -121,9 +120,12 @@ function ContactEditModal({contactData}: IProps) {
 
 	return (
 		<>
-			<button className='custom-btn' onClick={handleClickOpen}>
-				<span>Editar</span>
-			</button>
+			<div className='menu-item' onClick={handleClickOpen}>
+				<span className='menu-btn'>
+					<FaUserPlus />
+					Novo Contato
+				</span>
+			</div>
 
 			<BootstrapDialog
 				onClose={handleClose}
@@ -134,14 +136,14 @@ function ContactEditModal({contactData}: IProps) {
 					id='customized-dialog-title'
 					onClose={handleClose}
 				>
-					Editar Contato
+					Dados do contato
 				</BootstrapDialogTitle>
 				<DialogContent dividers>
 					<StyledEditContactForm onSubmit={handleSubmit(onSubmit)}>
 						<Controller
 							name='fullName'
 							control={control}
-							defaultValue={contactData.fullName}
+							defaultValue=''
 							render={({field}) => (
 								<TextField
 									{...field}
@@ -158,7 +160,7 @@ function ContactEditModal({contactData}: IProps) {
 						<Controller
 							name='email'
 							control={control}
-							defaultValue={contactData.email}
+							defaultValue=''
 							render={({field}) => (
 								<TextField
 									{...field}
@@ -175,7 +177,7 @@ function ContactEditModal({contactData}: IProps) {
 						<Controller
 							name='mobilePhone'
 							control={control}
-							defaultValue={contactData.mobilePhone}
+							defaultValue=''
 							render={({field}) => (
 								<TextField
 									{...field}
@@ -193,7 +195,7 @@ function ContactEditModal({contactData}: IProps) {
 						<Controller
 							name='phone'
 							control={control}
-							defaultValue={contactData.phone}
+							defaultValue=''
 							render={({field}) => (
 								<TextField
 									{...field}
@@ -208,7 +210,7 @@ function ContactEditModal({contactData}: IProps) {
 						/>
 
 						<button className='custom-btn' disabled={disableBtn}>
-							<span>Editar</span>
+							<span>Adicionar</span>
 						</button>
 					</StyledEditContactForm>
 				</DialogContent>
@@ -217,4 +219,4 @@ function ContactEditModal({contactData}: IProps) {
 	);
 }
 
-export default ContactEditModal;
+export default ContactCreateModal;

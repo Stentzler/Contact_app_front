@@ -1,7 +1,8 @@
-import {createContext, useState, ReactNode} from 'react';
+import {createContext, useState, ReactNode, useContext} from 'react';
 import api from '../../utils/axios';
 import {toastError, toastSuccess} from '../../utils/toasts';
 import {useNavigate} from 'react-router-dom';
+import ContactContext from '../ContactContext';
 
 interface Props {
 	children: ReactNode;
@@ -32,6 +33,9 @@ export const UserProvider = ({children}: Props) => {
 	const [disableLoginButton, setDisableLoginButton] = useState(false);
 	const navigate = useNavigate();
 
+	//Contact Context
+	const {setContacts} = useContext(ContactContext);
+
 	const login = async (data: any) => {
 		setDisableLoginButton(true);
 
@@ -45,6 +49,12 @@ export const UserProvider = ({children}: Props) => {
 				headers: {Authorization: `Bearer ${response.data.token}`},
 			});
 			setUserData(userData.data);
+
+			// get contacts
+			const contacts = await api.get('/users/contacts', {
+				headers: {Authorization: `Bearer ${response.data.token}`},
+			});
+			setContacts(contacts.data);
 
 			setDisableLoginButton(false);
 			toastSuccess('Bem-vindo!');
