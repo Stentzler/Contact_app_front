@@ -9,10 +9,10 @@ import {TextField} from '@mui/material';
 import {useState} from 'react';
 import {useForm, SubmitHandler, Controller} from 'react-hook-form';
 import {yupResolver} from '@hookform/resolvers/yup';
-import * as yup from 'yup';
 import {StyledRegisterForm} from './styles';
 import {toastError, toastSuccess} from '../../utils/toasts';
 import api from '../../utils/axios';
+import {registerSchema} from '../../utils/schemas';
 
 const BootstrapDialog = styled(Dialog)(({theme}) => ({
 	'& .MuiDialogContent-root': {
@@ -53,11 +53,6 @@ function BootstrapDialogTitle(props: DialogTitleProps) {
 	);
 }
 
-const schema = yup.object().shape({
-	email: yup.string().email().required(),
-	password: yup.string().required(),
-});
-
 interface IFormInputs {
 	email: string;
 	password: string;
@@ -76,7 +71,7 @@ function RegistrationModal() {
 		handleSubmit,
 		formState: {errors},
 	} = useForm<IFormInputs>({
-		resolver: yupResolver(schema),
+		resolver: yupResolver(registerSchema),
 		reValidateMode: 'onSubmit',
 	});
 

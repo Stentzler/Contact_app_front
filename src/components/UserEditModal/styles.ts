@@ -4,7 +4,7 @@ export const StyledEditContactForm = styled.form`
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
-	gap: 18px;
+	gap: 28px;
 	padding: 0 18px;
 
 	min-width: 380px;

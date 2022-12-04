@@ -1,5 +1,5 @@
 import {useContext, useEffect} from 'react';
-import {FaSignOutAlt, FaUserCheck, FaUserPlus} from 'react-icons/fa';
+import {FaSignOutAlt, FaUserCheck} from 'react-icons/fa';
 import UserContext from '../../context/UserContext';
 import {useNavigate} from 'react-router-dom';
 import UserDeleteModal from '../UserDeleteModal';
@@ -8,7 +8,7 @@ import api from '../../utils/axios';
 import ContactCreateModal from '../ContactCreateModal';
 
 function UserMenu() {
-	const {userData, token, setUserData} = useContext(UserContext);
+	const {userData, token, setUserData, setToken} = useContext(UserContext);
 	const navigate = useNavigate();
 
 	// isToken
@@ -36,10 +36,8 @@ function UserMenu() {
 	};
 
 	const handleLogout = () => {
-		// navigate('/');
-		// setToken('');
-		console.log(userData);
-		console.log(token);
+		navigate('/');
+		setToken('');
 	};
 
 	return (

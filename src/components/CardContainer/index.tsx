@@ -18,6 +18,7 @@ function CardContainer() {
 					<FaSearch />
 				</div>
 				<div className='card-container'>
+					{contacts.length === 0 && <p>Adicione um contato</p>}
 					{contacts.map(contact => (
 						<ContactCard contactData={contact} key={contact.id} />
 					))}

@@ -8,7 +8,7 @@ import {TextField} from '@mui/material';
 import {useContext, useState} from 'react';
 import {useForm, SubmitHandler, Controller} from 'react-hook-form';
 import {yupResolver} from '@hookform/resolvers/yup';
-import * as yup from 'yup';
+import {editContactSchema} from '../../utils/schemas';
 import {StyledEditContactForm} from './styles';
 import api from '../../utils/axios';
 import {toastError, toastSuccess} from '../../utils/toasts';
@@ -54,14 +54,8 @@ function BootstrapDialogTitle(props: DialogTitleProps) {
 	);
 }
 
-const schema = yup.object().shape({
-	email: yup.string().email().required(),
-});
-
 interface IFormInputs {
 	email: string;
-	password: string;
-	confirmPassword: string;
 	fullName: string;
 	mobilePhone: string;
 	phone: string;
@@ -82,7 +76,7 @@ function ContactEditModal({contactData}: IProps) {
 		handleSubmit,
 		formState: {errors},
 	} = useForm<IFormInputs>({
-		resolver: yupResolver(schema),
+		resolver: yupResolver(editContactSchema),
 		reValidateMode: 'onSubmit',
 	});
 

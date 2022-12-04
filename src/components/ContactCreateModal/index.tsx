@@ -8,13 +8,13 @@ import {TextField} from '@mui/material';
 import {useContext, useState} from 'react';
 import {useForm, SubmitHandler, Controller} from 'react-hook-form';
 import {yupResolver} from '@hookform/resolvers/yup';
-import * as yup from 'yup';
 import {StyledEditContactForm} from './styles';
 import {FaUserPlus} from 'react-icons/fa';
 import api from '../../utils/axios';
 import UserContext from '../../context/UserContext';
 import {toastError, toastSuccess} from '../../utils/toasts';
 import ContactContext from '../../context/ContactContext';
+import {createContactSchema} from '../../utils/schemas';
 
 const BootstrapDialog = styled(Dialog)(({theme}) => ({
 	'& .MuiDialogContent-root': {
@@ -55,10 +55,6 @@ function BootstrapDialogTitle(props: DialogTitleProps) {
 	);
 }
 
-const schema = yup.object().shape({
-	email: yup.string().email().required(),
-});
-
 interface IFormInputs {
 	email: string;
 	password: string;
@@ -79,7 +75,7 @@ function ContactCreateModal() {
 		handleSubmit,
 		formState: {errors},
 	} = useForm<IFormInputs>({
-		resolver: yupResolver(schema),
+		resolver: yupResolver(createContactSchema),
 		reValidateMode: 'onSubmit',
 	});
 
