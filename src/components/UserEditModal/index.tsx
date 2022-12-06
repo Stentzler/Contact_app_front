@@ -103,7 +103,7 @@ function UserEditModal() {
 			<div className='menu-item'>
 				<span className='menu-btn' onClick={handleClickOpen}>
 					<FaUserEdit />
-					Editar Meus dados
+					Editar Meus Dados
 				</span>
 			</div>
 
@@ -116,7 +116,7 @@ function UserEditModal() {
 					id='customized-dialog-title'
 					onClose={handleClose}
 				>
-					Editar Meus Dados
+					Editar meus dados
 				</BootstrapDialogTitle>
 				<DialogContent dividers>
 					<StyledEditContactForm onSubmit={handleSubmit(onSubmit)}>
@@ -127,6 +127,7 @@ function UserEditModal() {
 							render={({field}) => (
 								<TextField
 									{...field}
+									id='fullNameEdit'
 									type='text'
 									label='Nome Completo'
 									size='small'
@@ -144,6 +145,7 @@ function UserEditModal() {
 							render={({field}) => (
 								<TextField
 									{...field}
+									id='emailEdit'
 									type='email'
 									label='Email'
 									size='small'
@@ -161,6 +163,7 @@ function UserEditModal() {
 							render={({field}) => (
 								<TextField
 									{...field}
+									id='mobilePhoneEdit'
 									type='text'
 									size='small'
 									label='Telefone'
@@ -179,6 +182,7 @@ function UserEditModal() {
 							render={({field}) => (
 								<TextField
 									{...field}
+									id='phoneEdit'
 									type='text'
 									size='small'
 									label='Telefone Fixo (Opcional)'
@@ -189,7 +193,11 @@ function UserEditModal() {
 							)}
 						/>
 
-						<button className='custom-btn' disabled={disableBtn}>
+						<button
+							className='custom-btn'
+							disabled={disableBtn}
+							id='editUserDataBtn'
+						>
 							<span>Editar</span>
 						</button>
 					</StyledEditContactForm>

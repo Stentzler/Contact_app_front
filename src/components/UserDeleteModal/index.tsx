@@ -110,7 +110,7 @@ function UserDeleteModal({userName}: IProps) {
 					id='customized-dialog-title'
 					onClose={handleClose}
 				>
-					Deletar Contato
+					Deletar Conta
 				</BootstrapDialogTitle>
 				<StyledDeleteContactContainer>
 					<DialogContent dividers>
@@ -119,7 +119,7 @@ function UserDeleteModal({userName}: IProps) {
 						</Typography>
 					</DialogContent>
 					<button
-						className='custom-btn'
+						className='custom-btn user-delete'
 						onClick={handleDelete}
 						style={{backgroundColor: '#c70707'}}
 						disabled={disableDelButton}

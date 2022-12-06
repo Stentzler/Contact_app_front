@@ -117,6 +117,7 @@ function RegistrationModal() {
 							render={({field}) => (
 								<TextField
 									{...field}
+									id='fullNameRegister'
 									type='text'
 									label='Nome Completo'
 									size='small'
@@ -134,6 +135,7 @@ function RegistrationModal() {
 							render={({field}) => (
 								<TextField
 									{...field}
+									id='emailRegister'
 									type='email'
 									label='Email'
 									size='small'
@@ -151,6 +153,7 @@ function RegistrationModal() {
 							render={({field}) => (
 								<TextField
 									{...field}
+									id='mobilePhoneRegister'
 									type='text'
 									size='small'
 									label='Telefone'
@@ -169,6 +172,7 @@ function RegistrationModal() {
 							render={({field}) => (
 								<TextField
 									{...field}
+									id='phoneRegister'
 									type='text'
 									size='small'
 									label='Telefone Fixo (Opcional)'
@@ -185,6 +189,7 @@ function RegistrationModal() {
 							render={({field}) => (
 								<TextField
 									{...field}
+									id='passwordRegister'
 									type='password'
 									size='small'
 									label='Senha'
@@ -203,6 +208,7 @@ function RegistrationModal() {
 								<TextField
 									{...field}
 									type='password'
+									id='confirmPasswordRegister'
 									size='small'
 									label='Cofirme a senha'
 									variant='standard'
@@ -215,7 +221,11 @@ function RegistrationModal() {
 								/>
 							)}
 						/>
-						<button className='custom-btn' disabled={disableBtn}>
+						<button
+							className='custom-btn'
+							disabled={disableBtn}
+							id='registerBtn'
+						>
 							{disableBtn ? 'Loading...' : <span>Registrar</span>}
 						</button>
 					</StyledRegisterForm>

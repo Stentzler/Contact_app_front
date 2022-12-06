@@ -123,7 +123,7 @@ function ContactDeleteModal({contactData}: IProps) {
 						</Typography>
 					</DialogContent>
 					<button
-						className='custom-btn'
+						className='custom-btn delete-confirm'
 						onClick={confirmDelete}
 						style={{backgroundColor: '#c70707'}}
 						disabled={disableBtn}

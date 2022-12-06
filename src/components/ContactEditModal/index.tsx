@@ -109,8 +109,8 @@ function ContactEditModal({contactData}: IProps) {
 
 	return (
 		<>
-			<button className='custom-btn' onClick={handleClickOpen}>
-				<span>Editar</span>
+			<button className='custom-btn edit-contact-btn' onClick={handleClickOpen}>
+				<span>Editar </span>
 			</button>
 
 			<BootstrapDialog
@@ -133,6 +133,7 @@ function ContactEditModal({contactData}: IProps) {
 							render={({field}) => (
 								<TextField
 									{...field}
+									id='fullNameEditContact'
 									type='text'
 									label='Nome Completo'
 									size='small'
@@ -150,6 +151,7 @@ function ContactEditModal({contactData}: IProps) {
 							render={({field}) => (
 								<TextField
 									{...field}
+									id='emailEditContact'
 									type='email'
 									label='Email'
 									size='small'
@@ -167,6 +169,7 @@ function ContactEditModal({contactData}: IProps) {
 							render={({field}) => (
 								<TextField
 									{...field}
+									id='mobilePhoneEditContact'
 									type='text'
 									size='small'
 									label='Telefone'
@@ -185,6 +188,7 @@ function ContactEditModal({contactData}: IProps) {
 							render={({field}) => (
 								<TextField
 									{...field}
+									id='phoneEditContact'
 									type='text'
 									size='small'
 									label='Telefone Fixo (Opcional)'
@@ -195,7 +199,7 @@ function ContactEditModal({contactData}: IProps) {
 							)}
 						/>
 
-						<button className='custom-btn' disabled={disableBtn}>
+						<button className='custom-btn edit-contact' disabled={disableBtn}>
 							<span>Editar</span>
 						</button>
 					</StyledEditContactForm>

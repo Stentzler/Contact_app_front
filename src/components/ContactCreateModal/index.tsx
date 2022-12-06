@@ -109,7 +109,7 @@ function ContactCreateModal() {
 	return (
 		<>
 			<div className='menu-item' onClick={handleClickOpen}>
-				<span className='menu-btn'>
+				<span className='menu-btn' id='contactAddModal'>
 					<FaUserPlus />
 					Novo Contato
 				</span>
@@ -135,6 +135,7 @@ function ContactCreateModal() {
 							render={({field}) => (
 								<TextField
 									{...field}
+									id='fullNameCreateContact'
 									type='text'
 									label='Nome Completo'
 									size='small'
@@ -152,6 +153,7 @@ function ContactCreateModal() {
 							render={({field}) => (
 								<TextField
 									{...field}
+									id='emailCreateContact'
 									type='email'
 									label='Email'
 									size='small'
@@ -169,6 +171,7 @@ function ContactCreateModal() {
 							render={({field}) => (
 								<TextField
 									{...field}
+									id='mobilePhoneCreateContact'
 									type='text'
 									size='small'
 									label='Telefone'
@@ -187,6 +190,7 @@ function ContactCreateModal() {
 							render={({field}) => (
 								<TextField
 									{...field}
+									id='phoneCreateContact'
 									type='text'
 									size='small'
 									label='Telefone Fixo (Opcional)'
