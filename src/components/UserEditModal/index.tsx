@@ -76,8 +76,12 @@ function UserEditModal() {
 		setOpen(false);
 	};
 
-	const onSubmit: SubmitHandler<IFormInputs> = async data => {
+	const onSubmit: SubmitHandler<IFormInputs> = async (data: any) => {
 		setDisableBtn(true);
+
+		if (userData.email === data.email) {
+			delete data.email;
+		}
 
 		try {
 			const response = await api.patch('/users', data, {
